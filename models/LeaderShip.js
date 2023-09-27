@@ -41,7 +41,7 @@ const LeadershipSchema = new mongoose.Schema({
 LeadershipSchema.pre('updateOne', function (next) {
     let label, badge;
     const score = this._update.score;
-    if (score >= 75 && score < 100) {
+    if (score >= 75 && score <= 100) {
         label = "SuperGold";
         badge = 'SuperGold.png'
     }
