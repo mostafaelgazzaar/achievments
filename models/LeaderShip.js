@@ -13,7 +13,7 @@ const LeadershipSchema = new mongoose.Schema({
     time: { type: Number, required: true },
     badge: {
         type: String, default: function () {
-            if (this.score >= 75 && this.score < 100) {
+            if (this.score >= 75 && this.score <= 100) {
                 this.label = "SuperGold";
                 return 'SuperGold.png'
             }
