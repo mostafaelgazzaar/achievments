@@ -107,7 +107,7 @@ router.get('/leadership', async (req, res) => {
         });
 
         // find leader ship by game and level and order by score
-        let leaderships = await LeaderShip.find({ level: level, game: game }).sort({ score: -1, time: -1 }).lean();
+        let leaderships = await LeaderShip.find({ level: level, game: game }).sort({ score: -1, time: 1 }).lean();
 
         // map each time to minutes and seconds 120 seconds => 2:00
         leaderships = leaderships.map(leaderShip => {
