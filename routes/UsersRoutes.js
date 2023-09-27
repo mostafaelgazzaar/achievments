@@ -11,8 +11,17 @@ router.post('/', async (req, res) => {
             });
         }
 
+        if (!req.body.application) {
+            return res.status(400).send({
+                message: "application can not be empty"
+            });
+        }
+
         // check if user exists
-        const foundUser = await User.findOne({ userName: req.body.userName });
+        const foundUser = await User.findOne({
+            userName: req.body.userName,
+            application: req.body.application
+        });
         if (foundUser) {
             return res.status(400).send({
                 message: "user already exists"
@@ -21,6 +30,7 @@ router.post('/', async (req, res) => {
 
         const user = new User({
             userName: req.body.userName,
+            application: req.body.application
         });
         await user.save();
         res.success(user);
