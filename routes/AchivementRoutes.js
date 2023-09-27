@@ -84,7 +84,7 @@ router.get('/', async (req, res) => {
             //map each time to minutes and seconds 120 seconds => 2:00
             const minutes = Math.floor(achievement.time / 60);
             let seconds = achievement.time - minutes * 60;
-            if(seconds < 10) seconds = `0${seconds}`; // add 0 if seconds less than 10 ( 2 => 02
+            if (seconds < 10) seconds = `0${seconds}`; // add 0 if seconds less than 10 ( 2 => 02
             achievement.time = `${minutes}:${seconds}`;
             return achievement;
         });
@@ -113,7 +113,7 @@ router.get('/leadership', async (req, res) => {
         leaderships = leaderships.map(leaderShip => {
             const minutes = Math.floor(leaderShip.time / 60);
             let seconds = leaderShip.time - minutes * 60;
-            if(seconds < 10) seconds = `0${seconds}`;
+            if (seconds < 10) seconds = `0${seconds}`;
             leaderShip.time = `${minutes}:${seconds}`;
             return leaderShip;
         });
@@ -156,6 +156,7 @@ router.post('/leadership', async (req, res) => {
         const foundLeaderShip = await LeaderShip.findOne({ userName: req.body.userName, game: req.body.game, level: req.body.level });
         if (foundLeaderShip) {
             const newScore = +req.body.score;
+            const time = req.body.time;
             const currentLeaderShip = await LeaderShip.updateOne({
                 userName: req.body.userName, game: req.body.game, level: req.body.level
             }, { score: newScore, time });
